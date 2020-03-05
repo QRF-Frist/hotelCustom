@@ -1,0 +1,171 @@
+/* 页面的公共样式文件，部分样式类是为了方便 js 操作元素*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box!important; /*css3 盒模型*/
+}
+html,body {
+  height: 100%;
+  min-width: 1200px;
+}
+body {
+  background-color: #f2f2f2;
+}
+body.layui-layout-body {
+  overflow: auto;
+}
+/*清除浮动*/
+.clearfix:after,.clearfix:before {
+  content: ' ';
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom:1;
+}
+/* 去除页面中的默认样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /*css3 盒模型*/
+}
+@font-face {
+    font-family: 'iconfont';
+    src: url('../font/iconfont.eot');
+    src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'),
+    url('../font/iconfont.woff2') format('woff2'),
+    url('../font/iconfont.woff') format('woff'),
+    url('../font/iconfont.ttf') format('truetype'),
+    url('../font/iconfont.svg#iconfont') format('svg');
+}
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.FL {
+    float: left;
+}
+.FR {
+    float: right;
+}
+/* 元素反转180度 */
+.eleRotate {
+  transform: rotate(180deg);
+  transition: all .5s;
+}
+/* 背景颜色为 绿色*/
+.bgcGreen {
+    color: lightgreen!important;
+    background-color: rgba(144, 238, 144, .2);
+}
+/* 背景颜色为 白色 */
+.bgcWhite {
+    background-color: #fff!important;
+}
+/* 隐藏页面类 */
+.hiddenPage {
+    display: none;
+}
+/* 显示页面 */
+.showPage {
+    display: block;
+}
+/* 主体区域左侧部分每个页面的公共样式 */
+.maiBox_webPage {
+    width: 1080px;
+    min-width: 800px;
+    height: 100%;
+    margin-left: 220px;
+}
+/* 底边距 20px */
+.marginBottom20 {
+    margin-bottom: 20px;
+}
+/* 元素边框的颜色为红色 */
+.borderRed {
+    border-color: red!important;
+}
+/* p 元素的警告样式 */
+.pWaring {
+    color: rgba(255,0,0,.7);
+    font-size: 14px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+/*  元素隐藏类 样式 */
+.elementHidden {
+    display: none;
+}
+/* 元素显示类 */
+.elementShow {
+    display: block;
+}
+/* 文字颜色为 lightgreen */
+.textLightGreen {
+    color: lightgreen!important;
+}
+/*将元素的定位模式换成 fixed*/
+.positionFixed {
+    position: fixed!important;
+}
+/* 内容盒子背景阴影样式类 */
+.bgBoxShadow {
+  box-shadow: 2px 3px 12px -1px rgba(0,0,0,.4);
+}
+input:active [type='button'],button:active  {
+  box-shadow: inset 3px 4px 4px 0px rgba(0,0,0,.2);
+}
+.scrollBar::-webkit-scrollbar
+{
+    width: 2px;
+    height: 3px;
+    background-color: #F5F5F5;
+}
+/*定义滚动条轨道 内阴影+圆角*/
+.scrollBar::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+/*定义滑块 内阴影+圆角*/
+.scrollBar::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.5);
+    background-color: #999;
+}
+.textColor {
+  color: rgba(76,109,232,.8);
+}
+.textSize {
+  font-size: 16px;
+}
+.textWeight {
+  font-weight: 700
+}
+.spanTextColor {
+  color: #a9a9a9;
+}
+.pTitle {
+  width: 100%;
+  height: 25px;
+  border-left: 6px solid rgba(76,109,232,.8);
+  padding-left: 20px;
+  line-height: 25px;
+    margin-bottom: 5px;
+}
+.paginationBox {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    left: 0px;
+    bottom: 0px;
+}
