@@ -15,8 +15,8 @@
 </template>
 
 <script>
-    import topNav from "../../components/topNav.vue";
-    import leftNav from "../../components/leftNav.vue";
+  import topNav from "../../components/topNav.vue";
+  import leftNav from "../../components/leftNav.vue";
 	export default {
 		name: 'roomsPage',
 		data(){

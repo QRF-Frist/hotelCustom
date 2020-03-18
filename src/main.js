@@ -17,9 +17,7 @@ Vue.config.productionTip = false;
   // 拦截请求
   axios.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
-    // 为请求头添加 token
-    config.headers.Authorization = localStorage.getItem('token');
-    console.log(config);
+
     return config;
   }, function (error) {
     // 对请求错误做些什么

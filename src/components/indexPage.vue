@@ -43,96 +43,26 @@
                 </div>
                 <div class="allRooms">
                     <div class="aRContent scrollBar" style="width: 100%;height:100%;overflow-y:auto;">
-                        <!-- 第五层 开始 -->
-                        <div class="theLeveFive roomLevel">
-                            <div class="rL_title"> 
-                                <span>5</span> <!-- 楼层标号 -->
+                    <template v-for="(value,key,index) in roomListInfo">
+                       <div 
+                         class="theLeveFive roomLevel" 
+                         :key="key">
+                         <div>
+                           <div class="rL_title"> 
+                                <span>{{key}}</span> <!-- 楼层标号 -->
                             </div>
-                            <!-- 房间盒子应该根据所请求到的数据，循环渲染出来 -->
-                            <!-- 房间盒子 开始 -->
                             <div class="rL_content clearfix">
-                                <div class="room" @click="showHomeDetailInfo(501)">
-                                    <span class="room_title">501 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">502 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">503 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">504 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">505 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">506 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">507 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">508 单人房</span>
-                                    <i class="iconfont icon-room"></i>
+                              <div 
+                                class="room" 
+                                v-for="(item,index) in value" 
+                                @click="showHomeDetailInfo(item.roomNum)">
+                                    <span class="room_title">{{item.roomNum}} {{item.roomType}}</span>
+                                    <i class="iconfont" :class="roomIconNameList[item.roomStatus]"></i>
                                 </div>
                             </div>
-                            <!-- 房间盒子 结束 -->
-                        </div>
-                        <!-- 第五层 结束 -->
-
-                        <!-- 第六层 开始 -->
-                        <div class="theLeveFive roomLevel">
-                            <div class="rL_title"> 
-                                <span>6</span> <!-- 楼层标号 -->
-                            </div>
-                            <!-- 房间盒子应该根据所请求到的数据，循环渲染出来 -->
-                            <!-- 房间盒子 开始 -->
-                            <div class="rL_content clearfix">
-                                <div class="room" @click="showHomeDetailInfo(501)">
-                                    <span class="room_title">601 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">602 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">603 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">604 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">605 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">606 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">607 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                                <div class="room">
-                                    <span class="room_title">608 单人房</span>
-                                    <i class="iconfont icon-room"></i>
-                                </div>
-                            </div>
-                            <!-- 房间盒子 结束 -->
-                        </div>
-                        <!-- 第六层 结束 -->
-
+                         </div>
+                       </div>
+                    </template>
                     </div>
                 </div>
             </div>
@@ -305,12 +235,16 @@
 </template>
 
 <script>
+import ajax from '../utils/ajax';
 import topNav from "./topNav.vue";
 import leftNav from "./leftNav.vue";
+import iconName from '../utils/iconName.js';
     export default {
         name:"indexPage",
         data(){
             return {
+                roomIconNameList: {}, // 
+                roomListInfo: {}, // 全部房间的信息,
                 customSource : ['散客', '团队', '预定'], // 
                 checkedSource: [],
                 customSourceIsIndeterminate: true,
@@ -348,8 +282,24 @@ import leftNav from "./leftNav.vue";
 
             }
         },
+        created(){
+          let that = this;
+          let myData = {};
+          ajax("/custom/getAllRoomInfo",{},"GET").then(res => {
+            res.roomList.map(ele => {
+              if (ele.roomLevel in myData){
+                myData[ele.roomLevel].push(ele);
+              } else {
+                myData[ele.roomLevel] = [ele];
+              }
+            });
+            that.roomListInfo = myData;
+            console.log('created',that.roomListInfo);
+          })
+        },
         mounted(){
-          this.toHandleRoomEventManage();
+          console.log('mounted',this.roomListInfo);
+          this.roomIconNameList = iconName.roomIconNameList;
         },
         components:{
             topNav,
@@ -444,13 +394,13 @@ import leftNav from "./leftNav.vue";
 
                console.log(searchField);
 
-               that.$axios({
-                  method: 'GET',
-                  url: '/custom/getAllRoomInfo',
-                  data:{
-                    searchObj: searchField
-                  }
-               })
+               // that.$axios({
+               //    method: 'GET',
+               //    url: '/custom/getAllRoomInfo',
+               //    data:{
+               //      searchObj: searchField
+               //    }
+               // })
             },
               // 处理 房务管理页面 数据初始化及后续查询的事务 结束
             

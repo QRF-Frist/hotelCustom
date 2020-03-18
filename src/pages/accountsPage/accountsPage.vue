@@ -8,7 +8,7 @@
         </div>
         <!-- 这里放的是每个主页面下的子页面  开始 -->
         <div class="mainContent">
-            <router-view></router-view>
+          <router-view></router-view>
         </div>
         <!-- 这里放的是每个主页面下的子页面  结束 -->
 	</div>
